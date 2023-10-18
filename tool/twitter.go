@@ -8,13 +8,14 @@ import (
 )
 
 const (
-	TwitterSearchUrl = "https://api.twitter.com/2/tweets/search/recent?query=from:%s&expansions=referenced_tweets.id&user.fields=created_at"
+	TwitterSearchUrl = "https://api.twitter.com/2/tweets/search/recent?query=from:%s&tweet.fields=created_at&expansions=referenced_tweets.id&user.fields=created_at"
 )
 
 type TweetsSearchResp struct {
 	Data []struct {
 		Id               string `json:"id"`
 		Text             string `json:"text"`
+		CreatedAt        string `json:"created_at"`
 		ReferencedTweets []struct {
 			Type string `json:"type"`
 			Id   string `json:"id"`

@@ -53,7 +53,16 @@ func (t *Task) twitter2lark(twitterName, larkKey string) (err error) {
 			}
 		}
 		if isSend := t.Rc.GetTweets2lark(v.Id); !isSend {
-			notify.SendLarkTextNotify(larkKey, twitterName, text)
+
+			inputTime, err := time.Parse(time.RFC3339, v.CreatedAt)
+			if err != nil {
+				fmt.Println("无法解析输入时间字符串:", err)
+				return
+			}
+			newTime := inputTime.Add(8 * time.Hour)
+			resultTimeStr := newTime.Format("2006-01-02 15:04:05")
+			title := fmt.Sprintf("%s     %s", twitterName, resultTimeStr)
+			notify.SendLarkTextNotify(larkKey, title, text)
 			if err := t.Rc.SetTweets2lark(v.Id); err != nil {
 				return fmt.Errorf("t.Rc.SetTweets2lark err: %s", err.Error())
 			}
