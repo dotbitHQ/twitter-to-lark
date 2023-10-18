@@ -1,0 +1,12 @@
+twitter:
+  bearer_token: "****"
+  twitter_list:
+    - {
+      lark_key: "****",
+      username: "****", # twitter username
+    }
+cache:
+  redis:
+    addr: "127.0.0.1:6379" # 172.17.0.1: docker 182.17.0.1: docker-compose
+    password: ""
+    db_num: 0
