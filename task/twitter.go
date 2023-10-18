@@ -52,9 +52,9 @@ func (t *Task) twitter2lark(twitterName, larkKey string) (err error) {
 				}
 			}
 		}
-		if isSend := t.Rc.GetTweets2lark("ccc"); !isSend {
+		if isSend := t.Rc.GetTweets2lark(v.Id); !isSend {
 			notify.SendLarkTextNotify(larkKey, twitterName, text)
-			if err := t.Rc.SetTweets2lark("ccc"); err != nil {
+			if err := t.Rc.SetTweets2lark(v.Id); err != nil {
 				return fmt.Errorf("t.Rc.SetTweets2lark err: %s", err.Error())
 			}
 			continue
