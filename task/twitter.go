@@ -56,8 +56,7 @@ func (t *Task) twitter2lark(twitterName, larkKey string) (err error) {
 
 			inputTime, err := time.Parse(time.RFC3339, v.CreatedAt)
 			if err != nil {
-				fmt.Println("无法解析输入时间字符串:", err)
-				return
+				return fmt.Errorf("time.Parse err: ", err.Error())
 			}
 			newTime := inputTime.Add(8 * time.Hour)
 			resultTimeStr := newTime.Format("2006-01-02 15:04:05")
