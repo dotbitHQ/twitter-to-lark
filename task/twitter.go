@@ -40,6 +40,7 @@ func (t *Task) twitter2lark(twitterName, larkKey string) (err error) {
 	if resp.Meta.ResultCount == 0 || len(resp.Data) == 0 {
 		return
 	}
+	fmt.Println(resp)
 	for i := len(resp.Data) - 1; i >= 0; i-- {
 		v := resp.Data[i]
 		text := v.Text
