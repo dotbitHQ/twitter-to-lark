@@ -22,6 +22,7 @@ func Initialize(red *redis.Client) *RedisCache {
 
 func (r *RedisCache) GetTweets2lark(id string) bool {
 	key := fmt.Sprintf("tweets2lark:%s", id)
+	r.Red.Del(key)
 	ret := r.Red.Get(key).Val()
 
 	if ret == "1" {
