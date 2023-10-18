@@ -40,7 +40,8 @@ func (t *Task) twitter2lark(twitterName, larkKey string) (err error) {
 	if resp.Meta.ResultCount == 0 || len(resp.Data) == 0 {
 		return
 	}
-	for _, v := range resp.Data {
+	for i := len(resp.Data) - 1; i >= 0; i-- {
+		v := resp.Data[i]
 		text := v.Text
 		if len(v.ReferencedTweets) > 0 {
 			if v.ReferencedTweets[0].Type == "retweeted" {
@@ -67,7 +68,7 @@ func (t *Task) twitter2lark(twitterName, larkKey string) (err error) {
 			}
 			continue
 		}
-
 	}
+
 	return
 }
