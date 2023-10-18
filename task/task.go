@@ -20,7 +20,7 @@ type Task struct {
 // smt_status,tx_status: (2,1)->(3,3)
 func (t *Task) Run() {
 
-	tickerCheckAddressBalance := time.NewTicker(time.Second * 5)
+	tickerCheckAddressBalance := time.NewTicker(time.Minute * 10)
 
 	//tickerCheckAddressBalanceMultisignaddr := time.NewTicker(time.Minute * 10)
 	//var dataSamplePayadd []BalanceSample

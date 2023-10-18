@@ -24,7 +24,7 @@ func (r *RedisCache) GetTweets2lark(id string) bool {
 	key := fmt.Sprintf("tweetslark:%s", id)
 
 	ret := r.Red.Get(key).Val()
-	fmt.Println("redis :", ret)
+	//fmt.Println("redis :", ret)
 	if ret == "1" {
 		return true
 	} else {
