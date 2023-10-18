@@ -21,7 +21,8 @@ func Initialize(red *redis.Client) *RedisCache {
 }
 
 func (r *RedisCache) GetTweets2lark(id string) bool {
-	key := fmt.Sprintf("tweets2lark:%s", id)
+	key := fmt.Sprintf("tweetstolark:%s", id)
+
 	ret := r.Red.Get(key).Val()
 
 	if ret == "1" {
@@ -31,7 +32,7 @@ func (r *RedisCache) GetTweets2lark(id string) bool {
 	}
 }
 func (r *RedisCache) SetTweets2lark(id string) error {
-	key := fmt.Sprintf("tweets2lark:%s", id)
+	key := fmt.Sprintf("tweetstolark:%s", id)
 	ret := r.Red.Set(key, 1, 0)
 	if err := ret.Err(); err != nil {
 		return fmt.Errorf("get coupon lock: redis set nx-->%s", err.Error())
