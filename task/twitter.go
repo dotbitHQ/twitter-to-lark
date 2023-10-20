@@ -17,6 +17,7 @@ func (t *Task) doTwitter() (err error) {
 	addrList := config.Cfg.Twitter.TwitterList
 	fmt.Println("addr list :", addrList)
 	for _, v := range addrList {
+		fmt.Println("v============", v.Username, v.LarkKey)
 		twitterUsername := v.Username
 		larkKey := v.LarkKey
 		if twitterUsername == "" || larkKey == "" {
