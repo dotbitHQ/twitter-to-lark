@@ -15,6 +15,7 @@ type BalanceSample struct {
 
 func (t *Task) doTwitter() (err error) {
 	addrList := config.Cfg.Twitter.TwitterList
+	fmt.Println("addr list :", addrList)
 	for _, v := range addrList {
 		twitterUsername := v.Username
 		larkKey := v.LarkKey
@@ -40,7 +41,7 @@ func (t *Task) twitter2lark(twitterName, larkKey string) (err error) {
 	if resp.Meta.ResultCount == 0 || len(resp.Data) == 0 {
 		return
 	}
-	fmt.Println(resp)
+	fmt.Println(twitterName, "------------ ", resp)
 	for i := len(resp.Data) - 1; i >= 0; i-- {
 		v := resp.Data[i]
 		text := v.Text
