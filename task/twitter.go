@@ -25,7 +25,8 @@ func (t *Task) doTwitter() (err error) {
 		}
 		err = t.twitter2lark(twitterUsername, larkKey)
 		if err != nil {
-			return fmt.Errorf("t.twitter2lark err: %s", err.Error())
+			log.Errorf("t.twitter2lark err: %s", err.Error())
+			continue
 		}
 	}
 	return
