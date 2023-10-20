@@ -33,7 +33,6 @@ type TweetsSearchResp struct {
 }
 
 func TweetsSearch(token, twitterName string) (resp TweetsSearchResp, err error) {
-	return
 	url := fmt.Sprintf(TwitterSearchUrl, twitterName)
 	_, body, errs := gorequest.New().Get(url).Set("Authorization", fmt.Sprintf("Bearer %s", token)).Timeout(time.Second * 10).End()
 	if len(errs) > 0 {
