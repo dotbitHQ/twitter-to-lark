@@ -67,7 +67,6 @@ func runServer(ctx *cli.Context) error {
 	} else {
 		fmt.Println("set redis ok22222")
 	}
-	return nil
 	// task
 	twitterTask := task.Task{
 		Ctx: ctxServer,
