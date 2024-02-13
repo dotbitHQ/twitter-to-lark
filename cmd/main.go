@@ -62,6 +62,12 @@ func runServer(ctx *cli.Context) error {
 		log.Info("redis ok")
 	}
 	rc := cache.Initialize(red)
+
+	if isSend := rc.GetTweets2lark("1756182856999878694"); !isSend {
+		fmt.Println("GetTweets2lark 111")
+	} else {
+		fmt.Println("GetTweets2lark 222")
+	}
 	// task
 	twitterTask := task.Task{
 		Ctx: ctxServer,
