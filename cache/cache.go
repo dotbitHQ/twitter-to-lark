@@ -23,11 +23,12 @@ func Initialize(red *redis.Client) *RedisCache {
 func (r *RedisCache) GetTweets2lark(id string) (isSend bool, err error) {
 	key := fmt.Sprintf("tweetslark:%s", id)
 
-	if ret, err := r.Red.Get(key).Result(); err != nil {
-		return true, err
-	} else {
-		fmt.Println("1111redis get result: ", ret)
+	if _, err := r.Red.Get(key).Result(); err == redis.Nil {
 		return false, nil
+	} else if err != nil {
+		return false, fmt.Errorf("error querying key '%s': %v", key, err)
+	} else {
+		return true, nil
 	}
 }
 func (r *RedisCache) SetTweets2lark(id string) error {
