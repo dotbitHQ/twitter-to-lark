@@ -20,15 +20,14 @@ func Initialize(red *redis.Client) *RedisCache {
 	return &RedisCache{Red: red}
 }
 
-func (r *RedisCache) GetTweets2lark(id string) bool {
+func (r *RedisCache) GetTweets2lark(id string) (isSend bool, err error) {
 	key := fmt.Sprintf("tweetslark:%s", id)
 
-	ret := r.Red.Get(key).Val()
-	//fmt.Println("redis :", ret)
-	if ret == "1" {
-		return true
+	if ret, err := r.Red.Get(key).Result(); err != nil {
+		return true, err
 	} else {
-		return false
+		fmt.Println("1111redis get result: ", ret)
+		return false, nil
 	}
 }
 func (r *RedisCache) SetTweets2lark(id string) error {

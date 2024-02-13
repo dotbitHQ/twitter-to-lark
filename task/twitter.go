@@ -55,21 +55,26 @@ func (t *Task) twitter2lark(twitterName, larkKey string) (err error) {
 				}
 			}
 		}
-		if isSend := t.Rc.GetTweets2lark(v.Id); !isSend {
+		if isSend, err := t.Rc.GetTweets2lark(v.Id); err != nil {
+			log.Errorf("t.Rc.GetTweets2lark err: %s", err.Error())
+		} else {
+			if !isSend {
+				inputTime, err := time.Parse(time.RFC3339, v.CreatedAt)
+				if err != nil {
+					return fmt.Errorf("time.Parse err: ", err.Error())
+				}
+				newTime := inputTime.Add(8 * time.Hour)
+				resultTimeStr := newTime.Format("2006-01-02 15:04:05")
+				title := fmt.Sprintf("%s     %s", twitterName, resultTimeStr)
+				notify.SendLarkTextNotify(larkKey, title, text)
+				if err := t.Rc.SetTweets2lark(v.Id); err != nil {
+					return fmt.Errorf("t.Rc.SetTweets2lark err: %s", err.Error())
+				}
+				continue
+			}
 
-			inputTime, err := time.Parse(time.RFC3339, v.CreatedAt)
-			if err != nil {
-				return fmt.Errorf("time.Parse err: ", err.Error())
-			}
-			newTime := inputTime.Add(8 * time.Hour)
-			resultTimeStr := newTime.Format("2006-01-02 15:04:05")
-			title := fmt.Sprintf("%s     %s", twitterName, resultTimeStr)
-			notify.SendLarkTextNotify(larkKey, title, text)
-			if err := t.Rc.SetTweets2lark(v.Id); err != nil {
-				return fmt.Errorf("t.Rc.SetTweets2lark err: %s", err.Error())
-			}
-			continue
 		}
+
 	}
 
 	return
