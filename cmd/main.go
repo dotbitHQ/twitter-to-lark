@@ -62,7 +62,12 @@ func runServer(ctx *cli.Context) error {
 		log.Info("redis ok")
 	}
 	rc := cache.Initialize(red)
-
+	if err := rc.SetTweets2lark("test11"); err != nil {
+		fmt.Println("set redis err11111")
+	} else {
+		fmt.Println("set redis ok22222")
+	}
+	return nil
 	// task
 	twitterTask := task.Task{
 		Ctx: ctxServer,
