@@ -63,7 +63,7 @@ func runServer(ctx *cli.Context) error {
 	}
 	rc := cache.Initialize(red)
 
-	if isSend, err := rc.GetTweets2lark("1756182856999878694"); err != nil {
+	if isSend, err := rc.GetTweets2lark("123123123"); err != nil {
 		log.Errorf("t.Rc.GetTweets2lark err: %s", err.Error())
 	} else {
 		fmt.Println("issend: ", isSend)
